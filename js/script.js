@@ -1,6 +1,23 @@
-const slides = [
-{
-    image: 'img/01.webp',
+const app = Vue.createApp({
+    data() {
+        return {
+        
+        };
+    },
+    methods: {
+        
+    },
+});
+
+app.mount('#root')
+
+
+
+
+
+const arrImages = [
+    {
+        image: 'img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
         text: 'Experience the rise of Miles Morales as the new hero masters incredible, explosive new powers to become his own Spider-Man.',
     }, {
@@ -22,4 +39,152 @@ const slides = [
     }
 ];
 
-console.log(slides);
+
+const containerHighlighted = document.querySelector('.highlighted');
+const containerThumbs = document.querySelector('.thumbs');
+let textInserter = document.querySelector('.text')
+let titleInserter = document.querySelector('.title')
+
+
+
+for (let i = 0; i < arrImages.length; i++) {
+	containerHighlighted.innerHTML += `<img src="${arrImages[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
+	containerThumbs.innerHTML += `<img src="${arrImages[i].image}" alt="" class="${i == 0 ? 'active' : ''}">`;
+}
+ 
+titleInserter.innerHTML = (arrImages[0].title);
+textInserter.innerHTML = (arrImages[0].text);
+
+
+
+// selezionimo le immagini nell'html
+const listHighlighted = document.querySelectorAll('.highlighted img');
+// selezioniamo le miniature
+const listThumbs = document.querySelectorAll('.thumbs img');
+// selezioniamo i bottoni
+const btnPrev = document.querySelector('.btn-prev');
+const btnNext = document.querySelector('.btn-next');
+
+
+
+
+// definito una variabile che rappresenta lo stato attuale del carosello
+// cioe' l'indice dell'immagine attiva
+let activeIndex = 0;
+
+ 
+btnNext.addEventListener('click',
+	function() {
+        console.log ('ciao');
+		// dall'immagine attiva tolgo la classe active
+		listHighlighted[activeIndex].classList.remove('active');
+		listThumbs[activeIndex].classList.remove('active');
+		// settiamo il nuovo valore di active index
+		activeIndex++;
+		if (activeIndex >= listHighlighted.length) {
+			activeIndex = 0;
+		}
+		// alla nuova immagine attiva aggiungiamo la classe active
+		listHighlighted[activeIndex].classList.add('active');
+		listThumbs[activeIndex].classList.add('active')
+		titleInserter.innerHTML = (arrImages[activeIndex].title);
+		textInserter.innerHTML = (arrImages[activeIndex].text);
+    }
+);
+
+btnPrev.addEventListener('click',
+	function() {
+        
+		// dall'immagine attiva tolgo la classe active
+		listHighlighted[activeIndex].classList.remove('active');
+		listThumbs[activeIndex].classList.remove('active');
+		// settiamo il nuovo valore di active index
+		activeIndex--;
+		if (activeIndex < 0) {
+			activeIndex = listHighlighted.length - 1;
+		}
+		// alla nuova immagine attiva aggiungiamo la classe active
+		listHighlighted[activeIndex].classList.add('active');
+		listThumbs[activeIndex].classList.add('active');
+		titleInserter.innerHTML = (arrImages[activeIndex].title);
+		textInserter.innerHTML = (arrImages[activeIndex].text);
+	}
+);
+
+// ciclo per aggiungere gli event listeners alle miniature
+for (let i = 0; i < listThumbs.length; i++) {
+	listThumbs[i].addEventListener('click',
+		function() {
+            console.log('cliccata la miniature in posizione ' + i)
+			listHighlighted[activeIndex].classList.remove('active');
+			listThumbs[activeIndex].classList.remove('active');
+			activeIndex = i;
+			listHighlighted[activeIndex].classList.add('active');
+			listThumbs[activeIndex].classList.add('active');
+			titleInserter.innerHTML = (arrImages[activeIndex].title);
+			textInserter.innerHTML = (arrImages[activeIndex].text);
+		}
+	)
+}
+
+const reverse = document.querySelector('.reverse');
+const forward = document.querySelector('.forward');
+
+let pincola = 0
+let pincolo = 0
+
+reverse.addEventListener('click', 
+	function() {
+		clearInterval(pincolo);
+		clearInterval(pincola);
+		pincola = setInterval(carinoselloMinus, 3000);
+		pincola
+	}
+)
+
+forward.addEventListener('click', 
+	function() {
+		clearInterval(pincola);
+		clearInterval(pincolo);
+		pincolo = setInterval(carinoselloPlus, 3000);
+		pincolo
+	}
+)
+
+function carinoselloPlus() {
+	
+	// dall'immagine attiva tolgo la classe active
+	listHighlighted[activeIndex].classList.remove('active');
+	listThumbs[activeIndex].classList.remove('active');
+	// settiamo il nuovo valore di active index
+	activeIndex++;
+	if (activeIndex >= listHighlighted.length) {
+		activeIndex = 0;
+	}
+	// alla nuova immagine attiva aggiungiamo la classe active
+	listHighlighted[activeIndex].classList.add('active');
+	listThumbs[activeIndex].classList.add('active')
+	titleInserter.innerHTML = (arrImages[activeIndex].title);
+	textInserter.innerHTML = (arrImages[activeIndex].text);
+}
+
+
+
+
+
+
+
+function carinoselloMinus() {
+	listHighlighted[activeIndex].classList.remove('active');
+	listThumbs[activeIndex].classList.remove('active');
+	// settiamo il nuovo valore di active index
+	activeIndex--;
+	if (activeIndex < 0) {
+		activeIndex = listHighlighted.length - 1;
+	}
+	// alla nuova immagine attiva aggiungiamo la classe active
+	listHighlighted[activeIndex].classList.add('active');
+	listThumbs[activeIndex].classList.add('active');
+	titleInserter.innerHTML = (arrImages[activeIndex].title);
+	textInserter.innerHTML = (arrImages[activeIndex].text);
+}

@@ -1,105 +1,110 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 1rem;
 }
 
-.item {
-    float: left;
-    width: 700px;
-    height: 300px;
+.carousel {
+	display: flex;
+	width: 900px;
+	max-width: 100%;
+	height: 500px;
+	max-height: 80vh;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.highlighted {
+	height: 100%;
+	width: 100%;
     position: relative;
-}
-
-.item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.item .text {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    text-align: right;
-    color: white;
 }
 
 .thumbs {
-    float: left;
-    height: 300px;
-    background: #000;
-    position: relative;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 20%;
 }
 
-.thumb {
-    height: calc((300px) / 5);
-    opacity: 0.5;
+.highlighted img {
+	display: none;
+	width: 720px;
+	height: 100%;
+	object-fit: cover;
 }
 
-.thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.carousel .highlighted .active {
+	display: block;
 }
 
-.thumb.active {
-    border: 2px solid #ccc;
-    opacity: 1;
+.carousel .controls {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: absolute;
+	top: 15px;
+	bottom: 15px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+	font-size: 2.5rem;
+	z-index: 9;
 }
 
-.prev, .next {
-    width: 20px;
-    height: 20px;
-    margin: 10px 0;
-    border-radius: 50%;
-    background: #ccc;
+.thumbs img {
+	flex: 1 0 0;
+	display: block;
+	width: 100%;
+	height: 0;
+	object-fit: cover;
+	filter: brightness(.3);
+}
+
+.thumbs .active {
+	filter: brightness(1);
+	border: 5px solid lightgrey;
+}
+
+.text {
+    bottom: 1rem;
+    right: 12rem;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    cursor: pointer;
-    z-index: 999;
+    color: white;
+    max-width: 250px;
+	z-index: 100;
+	text-align: center;
+	
 }
 
-.next {
-    bottom: 0;
-}
-
-/*
-EXTRA: in questo esempio gli accordion vengono creati
-usando 2 bordi di un quadratino ruotato di 45 gradi
-In una versione base si possono usare delle icone
-oppure i caratteri ∧ (&and;) e ∨ (&or;)
- */
-.prev::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    display: block;
+.title{
+	top: 1rem;
+    left: 1rem;
     position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%) rotate(-45deg);
+    color: white;
+    max-width: 250px;
+	z-index: 100;
+	text-align: center;
+	font-size: 2rem;
 }
 
-.next::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    display: block;
-    position: absolute;
-    bottom: 35%;
-    left: 50%;
-    transform: translate(-50%) rotate(135deg);
+
+.reverse{
+	position: fixed;
+	top: 85%;
+	left: 40%;
+}
+
+.forward{
+	position: fixed;
+	top: 85%;
+	right: 40%;
 }
