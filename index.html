@@ -12,16 +12,16 @@
 
     <div class="container">
 		<div class="carousel">
-                <div class="highlighted" >
-                    <img v-for="(pic, index) in arrImages" key="pic" class="active" :src="pic.image" alt="">
-                </div>
-                <div class="controls">
-                    <i class="bi bi-arrow-up-circle-fill btn btn-prev"></i>
-                    <i class="bi bi-arrow-down-circle-fill btn btn-next"></i>
-                </div>
+            <div class="highlighted" >
+                <img class="active" :src="arrImagesIndex(0)" alt="">
+            </div>
+            <div class="controls">
+                <i @click="addCounter()" class="bi bi-arrow-up-circle-fill btn btn-prev"></i>
+                <i class="bi bi-arrow-down-circle-fill btn btn-next"></i>
+            </div>
 
-                <div class="thumbs">
-                   <img v-for="(pic, index) in arrImages" key="pic" :src="pic.image" alt=""> 
+            <div class="thumbs">
+                <img v-for="(pic, index) in arrImages" key="pic" :src="pic.image" alt=""> 
                 </div>
             <div class="text"></div>
 			<div class="title"></div>
