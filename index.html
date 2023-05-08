@@ -12,24 +12,24 @@
 
     <div class="container">
 		<div class="carousel">
-            <div class="highlighted" >
+            <div class="highlighted" @mouseover="clearInterval()" @mouseleave="allForwards()">
                 <img class="active" :src="arrImagesIndex(pincolo)" alt="">
             </div>
-            <div class="controls">
+            <div class="controls" @mouseover="clearInterval()">
                 <i  @click="subtractCounter()"class="bi bi-arrow-up-circle-fill btn btn-prev"></i>
                 <i @click="addCounter()" class="bi bi-arrow-down-circle-fill btn btn-next"></i>
             </div>
 
-            <div class="thumbs">
+            <div class="thumbs" @mouseover="clearInterval()" @mouseleave="allForwards()">
                 <img @click="thumbs(index)" v-for="(pic, index) in arrImages" key="pic" :src="pic.image" alt="" :class="index == pincolo ? 'active' : ''"> 
+            </div>
             <div class="text"></div>
 			<div class="title"></div>
 
-			<!-- div con le miniature -->
 			
-
-            <button @click="allBackwards()" class="reverse" >carosello indietro</button>
+            <button @click="allBackwards()" class="reverse">carosello indietro</button>
 	        <button @click="allForwards()" class="forward">carosello avanti</button>
+            
 		</div>
 	</div>
 

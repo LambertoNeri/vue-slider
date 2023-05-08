@@ -29,8 +29,7 @@ const app = Vue.createApp({
                 }
             ],
             pincolo: 0,
-            MyIntervalForwards: 0,
-            MyIntervalBackwards: 0,
+            MyInterval: 0,
         };
     },
     methods: {
@@ -60,16 +59,19 @@ const app = Vue.createApp({
         },
 
         allForwards() {
-            clearInterval(this.MyIntervalForwards)
-            clearInterval(this.MyIntervalBackwards)
-            this.MyIntervalForwards = setInterval(this.addCounter, 3000)
+            clearInterval(this.MyInterval)
+            this.MyInterval = setInterval(this.addCounter, 1000)
         },
         
         allBackwards() {
-            clearInterval(this.MyIntervalForwards)
-            clearInterval(this.MyIntervalBackwards)
-            this.MyIntervalBackwards = setInterval(this.subtractCounter, 3000)
+            clearInterval(this.MyInterval)
+
+            this.MyInterval = setInterval(this.subtractCounter, 1000)
         },
+
+        clearInterval() {
+            clearInterval(this.MyInterval)
+        }
 	}
 
 
